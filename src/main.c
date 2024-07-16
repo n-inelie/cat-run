@@ -2,8 +2,12 @@
 #include "land.h"
 #include <ncurses.h>
 #include <string.h>
+#include <time.h>
+#include <stdlib.h>
 
 int main(void) {
+    srand(time(NULL)); 
+
     initscr();
     raw();
     noecho();
@@ -19,8 +23,8 @@ int main(void) {
     while (1) {
         clear();
         drawBox(space);
-        memset(l->terrain, 0, l->size);
-        l->terrain[tower_pos] = 3;
+        l->terrain[tower_pos - 1] = 0;
+        l->terrain[tower_pos] = rand() % 8;
         drawLand(*l, space, 5);
 
         refresh();
