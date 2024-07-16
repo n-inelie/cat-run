@@ -1,12 +1,12 @@
 #include "box.h"
 #include "land.h"
 #include <ncurses.h>
+#include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <stdlib.h>
 
 int main(void) {
-    srand(time(NULL)); 
+    srand(time(NULL));
 
     initscr();
     raw();
@@ -19,12 +19,10 @@ int main(void) {
 
     Land *l = LandCreate(space.width / 3);
 
-    uint8_t tower_pos = 5;
     while (1) {
         clear();
         drawBox(space);
-        l->terrain[tower_pos - 1] = 0;
-        l->terrain[tower_pos] = rand() % 8;
+        genTower(l, rand() % 8);
         drawLand(*l, space, 5);
 
         refresh();
@@ -32,11 +30,11 @@ int main(void) {
         int ch = getch();
         switch (ch) {
         case 'q':
+            LandDestroy(l);
             endwin();
             return 0;
             break;
         default:
-            ++tower_pos;
             break;
         }
     }

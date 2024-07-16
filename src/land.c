@@ -1,6 +1,7 @@
 #include "land.h"
 #include <ncurses.h>
 #include <stdlib.h>
+#include <string.h>
 
 Land *LandCreate(uint8_t size) {
     Land *l = malloc(sizeof(*l));
@@ -38,4 +39,9 @@ void drawLand(Land l, Box b, uint8_t base_height) {
     }
     mvaddch(zero_level, b.p.x, ACS_VLINE);
     mvaddch(zero_level, b.p.x + b.width - 1, ACS_VLINE);
+}
+
+inline void genTower(Land *l, uint8_t tower_height) {
+    memcpy(l->terrain, l->terrain + 1, l->size - 1);
+    l->terrain[l->size - 1] = tower_height;
 }

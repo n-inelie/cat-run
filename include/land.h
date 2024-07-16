@@ -13,5 +13,6 @@ Land *LandCreate(uint8_t size);
 void LandDestroy(Land *l);
 
 void drawLand(Land l, Box b, uint8_t base_height);
+void genTower(Land *l, uint8_t tower_height);
 
 #endif
