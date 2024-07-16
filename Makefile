@@ -26,3 +26,6 @@ clean:
 debug: CFLAGS += -ggdb
 debug: $(TARGET)
 
+optimize: CFLAGS += -O3
+optimize: $(TARGET)
+
